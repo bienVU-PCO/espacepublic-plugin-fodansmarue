@@ -7,15 +7,15 @@
     <version>5.0.2</version>
   </parent>
   <groupId>fr.paris.lutece.plugins</groupId>
-  <artifactId>plugin-fodansmarue</artifactId>
-  <version>1.4.3-SNAPSHOT</version>
+  <artifactId>plugin-fobienvu</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>lutece-plugin</packaging>
-  <name>Lutece fodansmarue plugin</name>
-  <url>https://dev.lutece.paris.fr/gitlab/tmma/r61/plugin-fodansmarue</url>
+  <name>Lutece fobienvu plugin</name>
+  <url>https://github.com/bienVU-PCO/espacepublic-plugin-fodansmarue</url>
   <scm>
-    <connection>scm:git:https://dev.lutece.paris.fr/gitlab/tmma/r61/plugin-fodansmarue.git</connection>
-    <developerConnection>scm:git:https://dev.lutece.paris.fr/gitlab/tmma/r61/plugin-fodansmarue.git</developerConnection>
-    <url>https://dev.lutece.paris.fr/gitlab/tmma/r61/plugin-fodansmarue</url>
+    <connection>scm:git:https://github.com/bienVU-PCO/espacepublic-plugin-fodansmarue.git</connection>
+    <developerConnection>scm:git:https://github.com/bienVU-PCO/espacepublic-plugin-fodansmarue.git</developerConnection>
+    <url>https://github.com/bienVU-PCO/espacepublic-plugin-fodansmarue</url>
     <tag>HEAD</tag>
   </scm>
   <properties>
@@ -29,7 +29,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <profile.pre-recette.dir>${basedir}/src/conf/prerec</profile.pre-recette.dir>
     <maven.javadoc.skip>true</maven.javadoc.skip>
-    <module.leaflet-dansmarue.version>6.5.1</module.leaflet-dansmarue.version>
+    <module.leaflet-bienvu.version>0.0.1-SNAPSHOT</module.leaflet-bienvu.version>
   </properties>
   <dependencies>
     <dependency>
@@ -51,7 +51,7 @@
     <dependency>
       <groupId>fr.paris.lutece.plugins</groupId>
       <artifactId>module-leaflet-dansmarue</artifactId>
-      <version>${module.leaflet-dansmarue.version}</version>
+      <version>${module.leaflet-bienvu.version}</version>
       <type>lutece-plugin</type>
     </dependency>
     <dependency>
@@ -104,7 +104,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>2.5.3</version>
         <configuration combine.self="override">
-          <tagNameFormat>plugin-fodansmarue-@{project.version}</tagNameFormat>
+          <tagNameFormat>plugin-fobienvu-@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
       <plugin>
