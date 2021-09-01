@@ -15,6 +15,7 @@
 			 <!--STEP ACTIVE-->
             <div class="step active">
             <@stepActive step="6" etape="confirmation"/>
+            	<#-- 
                 <div class="container">
                     <div class="row">
                         <div class="priorite-etape5">
@@ -25,6 +26,8 @@
                         </div>
                     </div>
                 </div>
+                -->
+                <#--
                 <div class="container">
                     <div class="row">
                         <div class="precisions-etape5">
@@ -34,6 +37,8 @@
                         </div>
                     </div>
                 </div>
+                -->
+                <#--
                 <#if not_signed_in?? && not_signed_in == true>
 	                <div class="container">
 	                    <div class="row">
@@ -48,8 +53,10 @@
 	                    </div>
 	                </div>
                 </#if>
+                -->
                 <div class="container">
                     <div class="row">
+                    	<div class="priorite-etape5"> <#-- enlever quand le compte sera en place -->
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 newsletter">
 							<#if not_signed_in?? && not_signed_in == true>
 								<p class="info-sup">#i18n{fodansmarue.etape.suivi.nocompte.email}</p>
@@ -67,6 +74,7 @@
                             </div>
                             </@checkForErrors>
 							<@printError key="email"/>
+                        </div>
                         </div>
                     </div>
                 </div>
