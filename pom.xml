@@ -11,11 +11,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>lutece-plugin</packaging>
   <name>Lutece fobienvu plugin</name>
-  <url>https://github.com/bienVU-PCO/espacepublic-plugin-fodansmarue</url>
+  <url>https://github.com/plainecommune/espacepublic-plugin-fodansmarue</url>
   <scm>
-    <connection>scm:git:https://github.com/bienVU-PCO/espacepublic-plugin-fodansmarue.git</connection>
-    <developerConnection>scm:git:https://github.com/bienVU-PCO/espacepublic-plugin-fodansmarue.git</developerConnection>
-    <url>https://github.com/bienVU-PCO/espacepublic-plugin-fodansmarue</url>
+    <connection>scm:git:https://github.com/plainecommune/espacepublic-plugin-fodansmarue.git</connection>
+    <developerConnection>scm:git:https://github.com/plainecommune/espacepublic-plugin-fodansmarue.git</developerConnection>
+    <url>https://github.com/plainecommune/espacepublic-plugin-fodansmarue</url>
     <tag>HEAD</tag>
   </scm>
   <properties>
