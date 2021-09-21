@@ -1,2 +1,2 @@
 # espacepublic-plugin-fodansmarue
-Application Front Office DansMaRue
+Application Front Office bienVU

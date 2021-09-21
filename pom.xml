@@ -40,11 +40,6 @@
     </dependency>
     <dependency>
       <groupId>fr.paris.lutece.plugins</groupId>
-      <artifactId>library-identitystore</artifactId>
-      <version>2.0.3</version>
-    </dependency>
-    <dependency>
-      <groupId>fr.paris.lutece.plugins</groupId>
       <artifactId>plugin-unittree</artifactId>
       <version>2.1.2</version>
     </dependency>
@@ -66,17 +61,11 @@
       <version>1.0.5</version>
       <type>lutece-plugin</type>
     </dependency>
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>9.4.1211</version>
-    </dependency>
-    <dependency>
-      <groupId>fr.paris.lutece.plugins</groupId>
-      <artifactId>plugin-piwik</artifactId>
-      <version>1.0.3</version>
-      <type>lutece-plugin</type>
-    </dependency>
+	<dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>42.2.23</version>
+	</dependency>
   </dependencies>
   <repositories>
     <repository>
