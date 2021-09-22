@@ -51,7 +51,7 @@
 	                                            	<#if doublon.encombrants ?has_content><#list doublon.encombrants as list_encombrant>  ${(list_encombrant.libelleTypeObjet)!}: ${(list_encombrant.quantite)!}  </#list></#if>	
 	
 	                                            </p>
-	                                            <#if doublon.type ?has_content><a class="suivi-btn" href="jsp/site/Portal.jsp?page=fodansmarue&action=validate_suivi_signalement&signalementId=${(doublon.id)!}"><button type="button" class="btn btn-title-remarque">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
+	                                            <#if doublon.type ?has_content><a class="suivi-btn" href="javascript:alert('Merci de votre contribution')"><button type="button" class="btn btn-title-remarque">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -86,7 +86,7 @@
 					<div class="container">
                 		<div class="row">
                    			<div class="col-md-12">
-                        		<button type="submit" class="btn btn-center continue" name="action_validate_doublons" role="button" >#i18n{fodansmarue.continuer}
+                        		<button type="submit" class="btn btn-center continue" name="action_validate_doublons" role="button" >#i18n{fodansmarue.noncontinuer}
                              		<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                         		</button>
                     		</div>
@@ -110,7 +110,7 @@
 	$("a.suivi-btn").click(function(e){
 		e.preventDefault();
 		var href = encodeURIComponent("${base_url}" + $(this).attr("href"));
-		displayCreateAccountPage( href );
+// 		displayCreateAccountPage( href );
 	});
 </script>
 </#if>

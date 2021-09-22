@@ -18,6 +18,7 @@
 			<@rowPreviousStepCategorie />
 		<div class="step active">
 		<@stepActive step="5" etape="finalisation"/>
+		<@mentionObligatoire/>
 		<#if !signalementFOBean.typeSignalement.horsDMR>
 			<div class="container">
 				<div class="content">
@@ -40,7 +41,7 @@
                         	<div class="col-md-5 col-sm-8 col-xs-12">
                             	<div class="form-group">
                                 	<label for="loc" class="champs-adresse">#i18n{fodansmarue.etape.finalisation.precision.label}</label>
-                               		<input type="text" onkeyup="reste(this.value);"  maxlength="155" class="form-control" id="commentaire" name="commentaire" value="${(signalementFOBean.commentaire)!}"/>
+                               		<input type="text" onkeyup="reste(this.value);"  maxlength="255" class="form-control" id="commentaire" name="commentaire" value="${(signalementFOBean.commentaire)!}"/>
 									<noscript>
 										<span class="champs-adresse">#i18n{fodansmarue.finalisation.precisions.max}</span>
 									</noscript>
@@ -60,7 +61,7 @@
 				</div>	
           		 <div class="container">
                     <div class="row">
-                    	<div class="col-md-6 col-sm-6 col-xs-12">
+                    	<div class="col-md-4 col-sm-6 col-xs-12">
                              <#if listupload_photo_detaillee?has_content>
 						            <#assign listFiles = listupload_photo_detaillee>
 						        <#else>
@@ -68,6 +69,9 @@
 						        </#if>
 							<@addFileInputAndfilesBox fieldLabel="#i18n{fodansmarue.etape.finalisation.field.label.photo.detaillee}" fieldName='photo_detaillee' handler=DansmarueAsynchronousUploadHandler listUploadedFiles=listFiles inputCssClass=""  />
                         </div>
+                        <div class="col-md-offset-2 col-md-6 col-sm-6 col-xs-12">
+                        	<@infobulle text="#i18n{fodansmarue.etape.finalisation.infobulle}" id="finalisation_tooltip"/>
+                        </div>  
                     </div>
                 </div>
 	          	<div class="container">
@@ -115,6 +119,6 @@
 $(window).scrollTop($('.step.active').offset().top);
 
 $(document).ready(function(){
-	$('#nbreMax').append('<span class="champs-adresse" id="caracteres">0</span> <label for="loc" class="champs-adresse">/155 #i18n{fodansmarue.etape.finalisation.caracteres}</label>');
+	$('#nbreMax').append('<span class="champs-adresse" id="caracteres">0</span> <label for="loc" class="champs-adresse">/255 #i18n{fodansmarue.etape.finalisation.caracteres}</label>');
 });
 </script>
