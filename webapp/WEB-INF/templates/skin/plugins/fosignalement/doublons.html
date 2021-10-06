@@ -30,9 +30,9 @@
 	                                            <img src=${(doublon.imgUrl)!} alt="Photo remarque" class="middle-tab-mob" height="180" width="230">
 	                                        </div>
 	                                        <div class="col-md-offset-1 col-md-7 space-img">
-												<h2 class="title-remarque">Type d'anomalie : <#if doublon.type ?has_content>${(doublon.type)!}<#else> #i18n{fodansmarue.etape.doublons.title.dossier.ramen} </#if></h2>
+												<h2 class="title-remarque">#i18n{fodansmarue.etape.doublons.categorie} <#if doublon.type ?has_content>${(doublon.type)!}<#else> #i18n{fodansmarue.etape.doublons.title.dossier.ramen} </#if></h2>
 	                                            <p class="info-title-remarque">${(doublon.adresse)!}<br/>#i18n{fodansmarue.etape.doublons.declaree}${(doublon.dateCreation)!} #i18n{fodansmarue.etape.doublons.a} ${(doublon.heureCreation)!}<br/>${(doublon.distance)!} m <br/><#if doublon.encombrants ?has_content><#list doublon.encombrants as list_encombrant>  ${(list_encombrant.libelleTypeObjet)!}: ${(list_encombrant.quantite)!}  </#list></#if>	</p>
-	                                            <#if doublon.type ?has_content><a class="suivi-btn" href="jsp/site/Portal.jsp?page=fodansmarue&action=validate_suivi_signalement&signalementId=${(doublon.id)!}"><button type="button" class="btn btn-title-remarque">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
+	                                            <#if doublon.type ?has_content><a class="suivi-btn" href=""><button type="button" class="btn btn-title-remarque">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -43,7 +43,7 @@
 	                                            <img src=${(doublon.imgUrl)!} alt="Photo remarque" class="middle-tab-mob" height="180" width="230">
 	                                        </div>
 	                                        <div class="col-md-offset-1 col-md-7 space-img">
-	                                            <h2 class="title-remarque">Type d'anomalie : <#if doublon.type ?has_content>${(doublon.type)!}<#else> #i18n{fodansmarue.etape.doublons.title.dossier.ramen} </#if></h2>
+	                                            <h2 class="title-remarque">#i18n{fodansmarue.etape.doublons.categorie} <#if doublon.type ?has_content>${(doublon.type)!}<#else> #i18n{fodansmarue.etape.doublons.title.dossier.ramen} </#if></h2>
 	                                            <p class="info-title-remarque">
 	                                            	${(doublon.adresse)!} <br />
 	                                            	#i18n{fodansmarue.etape.doublons.declaree}${(doublon.dateCreation)!} #i18n{fodansmarue.etape.doublons.a} ${(doublon.heureCreation)!} <br />
@@ -51,7 +51,7 @@
 	                                            	<#if doublon.encombrants ?has_content><#list doublon.encombrants as list_encombrant>  ${(list_encombrant.libelleTypeObjet)!}: ${(list_encombrant.quantite)!}  </#list></#if>	
 	
 	                                            </p>
-	                                            <#if doublon.type ?has_content><a class="suivi-btn" href="javascript:alert('Merci de votre contribution')"><button type="button" class="btn btn-title-remarque">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
+	                                            <#if doublon.type ?has_content><a class="suivi-btn" href=""><button type="button" class="btn btn-title-remarque">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
 	                                        </div>
 	                                    </div>
 	                                </div>

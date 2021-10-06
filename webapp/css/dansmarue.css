@@ -37,7 +37,7 @@ body {
 }
 
 .navbar-general {
-    background-color: rgb(12, 81, 138);
+    background-color: rgb(250, 27, 56);
     border: none;
     border-color: transparent;
     border-radius: 0px;
@@ -64,7 +64,7 @@ body {
 }
 
 .hero-filter {
-    background-color: rgba(12, 81, 138, 0.65);
+    background-color: rgba(250, 27, 56, 0.30);
     height: 300px;
 }
 
@@ -92,7 +92,7 @@ body {
 
 .picto-steps .step .picto {
     padding: 30px;
-    background-color: rgb(255,255,255);
+    background-color: rgb(236,236,236);
     display: table;
     border-radius: 80px;
 }
@@ -124,7 +124,7 @@ body {
     font-family: 'Montserrat',sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: rgb(12, 81, 138);
+    color: rgb(0, 0, 0);
 }
 
 .pull-middle {
@@ -197,7 +197,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 22px;
     font-weight: 700;
-    background-color: rgb(12, 81, 138);
+    background-color: rgb(89, 89, 89);
 }
 .horizontal-steps .step.active .headline:before {
     content:'';
@@ -205,7 +205,7 @@ body {
     height: 0;
     border-left: 25px solid transparent;
     border-right: 25px solid transparent;
-    border-top: 50px solid rgb(12, 81, 138);
+    border-top: 50px solid rgb(89, 89, 89);
     position: absolute;
     left: 49%;
     transform: scaleY(.5) scaleY(.5);
@@ -296,7 +296,7 @@ a.cgu {
     font-size: 15px;
     font-weight: 700;
     padding: 15px;
-    background-color: #df225a;
+    background-color: #fa1b38;
 }
 
 /* .bloc-info { */
@@ -406,7 +406,7 @@ a.left.carousel-control {
 
 .title-remarque {
     font-size: 16px;
-    color: #0c518a;
+    color: #fa1b38;
 }
 
 .info-title-remarque {
@@ -423,7 +423,7 @@ a.left.carousel-control {
 .btn-title-remarque {
     /*width: 254px;*/
     height: 49px;
-    background-color: #0c518a;
+    background-color: #7db900;
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 700;
@@ -722,12 +722,12 @@ form#regular .row.pictos [class*="col-"] a > *{
 }
 
 form#regular .row.pictos [class*="col-"] a.selected .svg {
-    fill: rgb(12, 81, 138);
+    fill: rgb(250, 27, 56);
 }
 
 form#regular .row.pictos [class*="col-"] a.selected .type-remarque-texte,
 form#regular .row.pictos [class*="col-"] a.selected  {
-    color:  rgb(12, 81, 138);
+    color:  rgb(250, 27, 56);
     font-weight: bold;
 }
 
@@ -1319,15 +1319,15 @@ form#regular .row.pictos [class*="col-"] a.selected .selected-value {
 	/*        		ERRORS				*/
 	/************************************/
 	.error-block .input-label{
-		color: #FF0000 !important;
+		color: #fa1b38 !important;
 	}
 
 	.error-block input{
-		border: solid 1px #FF0000;
+		border: solid 1px #fa1b38;
 	}
 
 	.errorDesc{
-		color: #FF0000;
+		color: #fa1b38;
 		font-size: 16px;
 	}
 	/******************************/
