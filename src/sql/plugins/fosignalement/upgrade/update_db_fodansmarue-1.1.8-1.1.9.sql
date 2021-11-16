@@ -1,4 +1,0 @@
---DMR-1919
---INSERT INTO core_datastore(entity_key,entity_value) VALUES
---('sitelabels.site_property.inportant.information.htmlblock', 
---'<p><strong><span style="color: #ff0000;">Si votre signalement concerne un encombrant, un stationnement tr&egrave;s g&ecirc;nant ou une situation v&eacute;ritablement dangereuse, il sera transmis aux &eacute;quipes pour une r&eacute;solution dans les meilleurs d&eacute;lais. Pour tous les autres signalements, les interventions sont suspendues pendant la p&eacute;riode de confinement.</span></strong></p>');

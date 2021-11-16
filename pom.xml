@@ -31,6 +31,15 @@
     <maven.javadoc.skip>true</maven.javadoc.skip>
     <module.leaflet-bienvu.version>0.0.1-SNAPSHOT</module.leaflet-bienvu.version>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>fr.paris.lutece</groupId>
+        <artifactId>lutece-core</artifactId>
+        <version>6.1.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>fr.paris.lutece</groupId>
