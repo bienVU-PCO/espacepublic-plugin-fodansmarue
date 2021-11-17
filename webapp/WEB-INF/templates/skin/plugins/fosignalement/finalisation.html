@@ -61,7 +61,7 @@
 				</div>	
           		 <div class="container">
                     <div class="row">
-                    	<div class="col-md-4 col-sm-6 col-xs-12">
+                    	<div class="col-md-3 col-sm-12 col-xs-12">
                              <#if listupload_photo_detaillee?has_content>
 						            <#assign listFiles = listupload_photo_detaillee>
 						        <#else>
@@ -69,7 +69,10 @@
 						        </#if>
 							<@addFileInputAndfilesBox fieldLabel="#i18n{fodansmarue.etape.finalisation.field.label.photo.detaillee}" fieldName='photo_detaillee' handler=DansmarueAsynchronousUploadHandler listUploadedFiles=listFiles inputCssClass=""  />
                         </div>
-                        <div class="col-md-offset-2 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                        	<img class="img-fluid" src="images/image-DMR/etape5-explications.png">
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
                         	<@infobulle text="#i18n{fodansmarue.etape.finalisation.infobulle}" id="finalisation_tooltip"/>
                         </div>  
                     </div>

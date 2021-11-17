@@ -44,10 +44,10 @@ jQuery.noConflict();
             });
             
             $('input[name=radiobtn-grp]').change(function() {
-            	$('.btn-title-remarque').removeAttr('disabled')
+            	$('.btn-title-remarque2').removeAttr('disabled')
             });
 
-            $('.btn-title-remarque').click(function(){
+            $('.btn-title-remarque2').click(function(){
                 var selectedValue = $('input[name=radiobtn-grp]:checked').closest('label').text();
 
                 if(typeof selectedValue !== "undefined") {
@@ -74,7 +74,7 @@ jQuery.noConflict();
 				$('#typeSignalementId').val(selectedCateroryId);
 				var retour = $(this).parent('div').parent('div').parent('div').parent('div').attr('id'); 
                 $( "#"+retour).modal('toggle');
-                $('.btn-title-remarque').attr('disabled', 'true');
+                $('.btn-title-remarque2').attr('disabled', 'true');
             });
 
 

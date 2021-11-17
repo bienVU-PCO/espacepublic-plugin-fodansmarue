@@ -384,7 +384,7 @@ button {
     float: right;
     width: 141px;
     height: 44px;
-    background-color: #0c518a;
+    background-color: rgb(250, 27, 56);
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 700;
@@ -410,7 +410,7 @@ a.left.carousel-control {
 
 .title-remarque {
     font-size: 16px;
-    color: #fa1b38;
+    color: rgb(250, 27, 56);
 }
 
 .info-title-remarque {
@@ -427,11 +427,40 @@ a.left.carousel-control {
 .btn-title-remarque {
     /*width: 254px;*/
     height: 49px;
-    background-color: #7db900;
+    background-color: rgb(125,185,0);
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 700;
     margin-top: 20px;
+}
+
+.btn-title-remarque2 {
+    /*width: 254px;*/
+    height: 49px;
+    background-color: rgb(250,27,56);
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.valider {
+    position: relative;
+    z-index: 1;
+}
+
+.valider::after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	width: 0;
+	height: 100%;
+	border-radius: 3px;
+	transition: all ease 0.35s;
+	background-color: rgb(180, 215, 108);
 }
 
 .bloc-remarque .space-img {
@@ -472,7 +501,7 @@ a:hover, a:focus {
 }
 
 .modal-header {
-    background-color: #0c518a;
+    background-color: rgb(250, 27, 56);
     color: #FFFFFF;
     border-bottom: none;
 }
@@ -573,7 +602,7 @@ label span {
 }
 
 .modal-body li {
-    color: #0c518a;
+    color: rgb(250, 27, 56);
     font-size: 16px;
     list-style: none;
 }
@@ -776,7 +805,7 @@ form#regular .row.pictos [class*="col-"] a.selected .selected-value {
     height: 100%;
     border-radius: 3px;
     transition: all ease 0.35s;
-    background-color: #b41a48;
+    background-color: rgb(255, 113, 131);
 }
 .btn:hover::after {
     width: 100%;
@@ -797,7 +826,7 @@ form#regular .row.pictos [class*="col-"] a.selected .selected-value {
     height: 100%;
     border-radius: 3px;
     transition: all ease 0.35s;
-    background-color: #0f4573;
+    background-color: rgb(255, 113, 131);
 }
 .compte {
     position: relative;
@@ -950,10 +979,10 @@ form#regular .row.pictos [class*="col-"] a.selected .selected-value {
 }
 .sous-titre {
     font: 700 18px 'Montserrat', Sans-serif;
-    color: #0c518a;
+    color: rgb(250, 27, 56);
 }
 .rubrique {
-    border-bottom: 2px solid #0c518a;
+    border-bottom: 2px solid rgb(250, 27, 56);
 }
 .info-suivi{
     margin-top: 10px;
@@ -1464,31 +1493,3 @@ form#regular .row.pictos [class*="col-"] a.selected .selected-value {
 {
 	margin: 0 !important;
 }
-
- input[type='radio']:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #d1d3d1;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid white;
-    }
-
-    input[type='radio']:checked:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #ffa500;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid white;
-    }
