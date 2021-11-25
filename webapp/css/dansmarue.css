@@ -242,7 +242,7 @@ body {
 a.cgu {
     margin: 40px 0;
     display: block;
-    color: rgb(39, 39, 39);
+    color: rgb(0, 0, 0);
     text-decoration: underline;
     font-family: 'Montserrat', sa;
     font-size: 18px;
@@ -273,7 +273,7 @@ a.cgu {
 
 .site-links li a {
     font-size: 15px;
-    color: rgb(51, 51, 51);   
+    color: rgb(0, 0, 0);   
     margin-right: 30px;
 }
 

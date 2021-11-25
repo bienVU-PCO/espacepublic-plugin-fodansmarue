@@ -79,6 +79,7 @@
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h4 class="modal-title">${type_signalement.libelle!}</h4>
+											<#assign titleLvl0 = type_signalement.libelle! >
 											<p>#i18n{fodansmarue.sous.titre.poup}</p>
 										</div>
 										<div class="tree">
@@ -114,7 +115,7 @@
 				<#else>
 				 <li>
                     <div id="${type_signalement.id!}" class="radio">
-                        <label><input type="radio" name="radiobtn-grp">${type_signalement.libelle!}</label>
+                        <label><input type="radio" name="radiobtn-grp" titleLvl0="${titleLvl0}">${type_signalement.libelle!}</label>
                     </div>
                 </li>
 				<@liste_type_signalement_cascade liste_type_signalement=type_signalement.listChild  deep=deep+1 />
@@ -285,10 +286,12 @@
 										function(event, ui) {
 											var labelTab = ui.item.label.split(SEPARATOR);
 											var lastLabel = labelTab[labelTab.length - 1];
+											var firtLabel = labelTab[0];
 											$('input[name=radiobtn-grp]')
 													.each(
 															function() {
-																if ($.trim($(this).closest('label').text()) == $.trim(lastLabel)) {
+																if ($.trim($(this).closest('label').text()) == $.trim(lastLabel) && 
+																		$.trim($(this).attr('titleLvl0')) == $.trim(firtLabel)) {
 																	$(this).prop("checked",true);
 																	var idRoot= $(this).parents('.modal.fade').attr('id');
 																	//if(!$('a[data-target=#'+idRoot+']').hasClass('selected')){
