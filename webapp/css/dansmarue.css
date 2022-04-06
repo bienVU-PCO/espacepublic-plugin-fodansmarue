@@ -47,7 +47,7 @@ body {
 
 .navbar-general a.logo {
     padding: 7px;
-    display: table;   
+    display:flex;   
 }
 
 .navbar-general a.logo img {
@@ -168,6 +168,25 @@ body {
 .mobile-app .app-description ul.badges li {
     list-style: none;
     display: inline-block;
+}
+
+.mobile-app .app-description .qr-codes{
+	display: flex;
+    justify-content: flex-start;
+}
+
+@media (max-width: 1024px){
+	.mobile-app .app-description .qr-codes{
+    justify-content: center;
+}
+}
+
+.mobile-app .app-description .qr-codes img:first-child{
+	margin-right: 3.5px;
+}
+
+.mobile-app .app-description .qr-codes img{
+	width: 135px;
 }
 
 /* .horizontal-steps { */
@@ -1038,9 +1057,6 @@ form#regular .row.pictos [class*="col-"] a.selected .selected-value {
     .horizontal-steps .step .content {
         margin-top: 5px;
     }
-    .navbar-general a.logo {
-        display: none;
-    }
     .navbar-general a.logo.mobile {
         display: table;
     }
@@ -1157,8 +1173,10 @@ form#regular .row.pictos [class*="col-"] a.selected .selected-value {
     .navbar-general {
         height: 62px;
     }
-    .navbar-general a.logo {
-        display: none;
+    .navbar-general a.logo img {
+        height: 55px;
+        width: auto;
+    	max-width: 90vw;
     }
     .navbar-general a.logo.mobile {
         display: table;
