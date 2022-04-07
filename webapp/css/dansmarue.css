@@ -463,6 +463,19 @@ a.left.carousel-control {
     margin-top: 20px;
 }
 
+#modal-valider .modal-content{
+	background-color: rgb(125,185,0);
+}
+
+#modal-valider .modal-body{
+	border-bottom:0;
+	
+}
+
+#modal-valider .modal-body p{
+	color: #000000;
+}
+
 .valider {
     position: relative;
     z-index: 1;
@@ -481,6 +494,8 @@ a.left.carousel-control {
 	transition: all ease 0.35s;
 	background-color: rgb(180, 215, 108);
 }
+
+
 
 .bloc-remarque .space-img {
     margin-left: 70px;

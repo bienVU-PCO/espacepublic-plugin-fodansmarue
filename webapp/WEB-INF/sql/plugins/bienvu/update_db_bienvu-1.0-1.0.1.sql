@@ -1,0 +1,1 @@
+INSERT INTO core_datastore(entity_key,entity_value) VALUES ('sitelabels.site_property.doublon.validermessage', 'bien VU ! Merci de votre contribution, ce signalement est d&eacute;j&agrave; en cours de traitement par nos &eacute;quipes');

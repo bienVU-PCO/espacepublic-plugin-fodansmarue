@@ -32,7 +32,7 @@
 	                                        <div class="col-md-offset-1 col-md-7 space-img">
 												<h2 class="title-remarque">#i18n{fodansmarue.etape.doublons.categorie} <#if doublon.type ?has_content>${(doublon.type)!}<#else> #i18n{fodansmarue.etape.doublons.title.dossier.ramen} </#if></h2>
 	                                            <p class="info-title-remarque">${(doublon.adresse)!}<br/>#i18n{fodansmarue.etape.doublons.declaree}${(doublon.dateCreation)!} #i18n{fodansmarue.etape.doublons.a} ${(doublon.heureCreation)!}<br/>${(doublon.distance)!} m <br/><#if doublon.encombrants ?has_content><#list doublon.encombrants as list_encombrant>  ${(list_encombrant.libelleTypeObjet)!}: ${(list_encombrant.quantite)!}  </#list></#if>	</p>
-	                                            <#if doublon.type ?has_content><a class="suivi-btn" href=""><button type="button" class="btn btn-title-remarque valider">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
+	                                            <#if doublon.type ?has_content><a class="suivi-btn" href=""><button type="button" class="btn btn-title-remarque valider" data-toggle="modal" data-target="#modal-valider">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -51,11 +51,22 @@
 	                                            	<#if doublon.encombrants ?has_content><#list doublon.encombrants as list_encombrant>  ${(list_encombrant.libelleTypeObjet)!}: ${(list_encombrant.quantite)!}  </#list></#if>	
 	
 	                                            </p>
-	                                            <#if doublon.type ?has_content><a class="suivi-btn" href=""><button type="button" class="btn btn-title-remarque valider">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
+	                                            <#if doublon.type ?has_content><a class="suivi-btn" href=""><button type="button" class="btn btn-title-remarque valider" data-toggle="modal" data-target="#modal-valider">#i18n{fodansmarue.suivre.anomalie}</button></a></#if>
 	                                        </div>
 	                                    </div>
 	                                </div>
 									</#if>
+									<div id="modal-valider" class="modal fade" role="dialog">
+									  <div class="modal-dialog">
+									    <div class="modal-content">
+									      <div class="modal-body">
+									        <p>#dskey{sitelabels.site_property.doublon.validermessage}</p>
+									      </div>
+									      <div class="modal-footer">
+									      </div>
+									    </div>
+									  </div>
+									</div>
 								   	</#list>
 		                        </div>
 							     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
