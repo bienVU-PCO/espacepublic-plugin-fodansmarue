@@ -86,6 +86,9 @@ public class AbstractXPage extends MVCApplication
     /** The Constant XPAGE_SUIVI. */
     public static final String XPAGE_SUIVI = "suivi";
 
+    /** The Constant XPAGE_FORMULAIRE_SATISFACTION. */
+    public static final String XPAGE_FORMULAIRE_SATISFACTION = "formulaireSatisfaction";
+
     /** The Constant URL_ACCUEIL. */
     // URLS
     protected static final String URL_ACCUEIL = "jsp/site/Portal.jsp?page=accueil";

@@ -1,0 +1,47 @@
+<@header/>
+<section id="page_formulaireSatisfaction">
+    <form id="form" action="jsp/site/Portal.jsp?page=formulaireSatisfaction"  method="post" novalidate>
+        <div class="container">
+            <div class="content">
+                <label for="loc" class="champs-adresse">test</label>
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="input-radio">
+                            <label for="choixAnomalieResolue" class="info-suivi">
+                                <input type="radio" id="choixAnomalieResolue" name="choixAnomalieResolue">
+                                #i18n{fodansmarue.formulaire.satisfaction.radioButton.choixAnomalieResolue}
+                            </label>
+                            <label for="choixAnomalieNonResolue" class="info-suivi">
+                                <input type="radio" id="choixAnomalieNonResolue" name="choixAnomalieNonResolue">
+                                #i18n{fodansmarue.formulaire.satisfaction.radioButton.choixAnomalieNonResolue}
+                            </label>
+                            <label for="choixAnomalieResolueEnPartie" class="info-suivi">
+                                <input type="radio" id="choixAnomalieResolueEnPartie" name="choixAnomalieResolueEnPartie">
+                                #i18n{fodansmarue.formulaire.satisfaction.radioButton.choixAnomalieResolueEnPartie}
+                            </label>
+                        </div>
+                        
+                        <input type="text" maxlength="255" class="form-control" id="commentaire" name="commentaire" value=""/>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-center continue" name="action_validate_service_fait" role="button">#i18n{fodansmarue.valider}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<script type="text/javascript">
+    $(window).scrollTop($('.step.active').offset().top);
+    
+    $(document).ready(function(){
+        
+        $("form").submit(e => {
+            $('button[type=submit]').prop('disabled',true);
+            $("form").attr('action',$("form").attr('action')+'&action=validate_signalement');
+            return true;
+        });
+    });
+</script>
