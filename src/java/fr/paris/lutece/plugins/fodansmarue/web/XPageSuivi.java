@@ -203,7 +203,7 @@ public class XPageSuivi extends AbstractXPage
 
         if ( ( token != null ) && ( instance != null ) )
         {
-            serviceFait = signalementBoService.validateServiceFaitSignalementByToken( token, instance );
+            serviceFait = _signalementBoService.validateServiceFaitSignalementByToken( token, instance );
         }
 
         if ( serviceFait )
@@ -253,7 +253,7 @@ public class XPageSuivi extends AbstractXPage
         Signalement signalement;
         if ( token != null )
         {
-            signalement = signalementBoService.getSignalementByToken( token, instance );
+            signalement = _signalementBoService.getSignalementByToken( token, instance );
             if ( signalement == null )
             {
                 throw new BusinessException( new Signalement( ),
@@ -262,7 +262,7 @@ public class XPageSuivi extends AbstractXPage
 
             try
             {
-                history = signalementBoService.getHistorySignalement( signalement.getId( ).intValue( ), instance );
+                history = _signalementBoService.getHistorySignalement( signalement.getId( ).intValue( ), instance );
             }
             catch( IOException e )
             {

@@ -41,6 +41,7 @@ import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
 import fr.paris.lutece.portal.web.xpages.XPage;
+import org.codehaus.jettison.json.JSONException;
 
 /**
  * The Class XPageFormulaireSatisfaction.
@@ -64,13 +65,23 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
     // MARKER
     private static final String MARK_SIGNALEMENT = "signalement";
 
+    /** The Constant MARK_REPONSE_FORMULAIRE. */
+    private static final String MARK_REPONSE_FORMULAIRE = "reponseFormulaire";
+
+    /** The Constant MARK_COMMENTAIRE_FORMULAIRE. */
+    private static final String MARK_COMMENTAIRE_FORMULAIRE = "commentaire";
 
     /** The Constant MARK_TOKEN. */
     private static final String MARK_TOKEN = "token";
 
+    /** The Constant MARK_IS_SATISFACTION_FORM_COMPLETE. */
+    private static final String MARK_IS_SATISFACTION_FORM_COMPLETE = "isSatisfactionFormComplete";
+
     /** The Constant PROPERTY_ID_STATE_SERVICE_FAIT. */
     // PROPERTIES
     public static final String PROPERTY_ID_STATE_SERVICE_FAIT = "signalement.idStateServiceFait";
+
+    private String _strToken;
 
     /**
      * Returns the content of the page accueil.
@@ -85,7 +96,10 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
     public XPage viewFormulaireSatisfaction( HttpServletRequest request ) throws IOException
     {
         Map<String, Object> model = getModel( );
+        _strToken = request.getParameter( MARK_TOKEN );
 
+        model.put( MARK_IS_SATISFACTION_FORM_COMPLETE, false );
+        model.put( MARK_TOKEN, _strToken );
         return getXPage( TEMPLATE_XPAGE_FORMULAIRE_SATISFACTION, request.getLocale( ), model );
     }
 
@@ -99,10 +113,16 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
      *             Signals that an I/O exception has occurred.
      */
     @Action( ACTION_VALIDER_CHOIX )
-    public XPage validerChoix( HttpServletRequest request )
+    public XPage validerChoix( HttpServletRequest request ) throws JSONException, IOException
     {
         Map<String, Object> model = getModel( );
 
+        String strReponseFormulaire = request.getParameter( MARK_REPONSE_FORMULAIRE );
+        String strCommentaire = request.getParameter( MARK_COMMENTAIRE_FORMULAIRE );
+
+        _signalementBoService.sauvegarderReponsesFormulaireSatisfaction( _strToken, strReponseFormulaire, strCommentaire );
+
+        model.put( MARK_IS_SATISFACTION_FORM_COMPLETE, true );
 
         return getXPage( TEMPLATE_XPAGE_FORMULAIRE_SATISFACTION, request.getLocale( ), model );
     }

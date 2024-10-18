@@ -1140,4 +1140,49 @@ public final class SignalementBOService implements ISignalementBOService
 
     }
 
+    /**
+     * Sauvegarder signalement.
+     *
+     * @param demandeSignalement
+     *            the demande signalement
+     * @param user
+     *            the user
+     * @param choice
+     *            the choice
+     * @return the JSON object
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     * @throws JSONException
+     *             the JSON exception
+     */
+    @Override
+    public JSONObject sauvegarderReponsesFormulaireSatisfaction( String strToken, String strChoixFormulaire, String strCommentaireSatisfaction ) throws JSONException
+    {
+        String response;
+        try
+        {
+            JSONObject jObject = new JSONObject( );
+
+            ObjectMapper mapper = new ObjectMapper( );
+            mapper.configure( DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false );
+
+            jObject.put( "token", strToken );
+            jObject.put( "choix", strChoixFormulaire );
+            jObject.put( "commentaire", strCommentaireSatisfaction );
+
+            response = callWSBOSignalement( AppPropertiesService.getProperty( SignalementConstants.PROPERTY_REST_SIGNALEMENT_BO_URL )
+                    .concat( SignalementConstants.SAVE_SATISFACTION_FORM_ANSWER), jObject.toString( ), true );
+
+            return new JSONObject( response );
+        }
+        catch( HttpAccessException e )
+        {
+            AppLogService.error( "Erreur lors l'appel à saveSatisfactionFormAnswer", e );
+        }
+
+        JSONObject jObjectResponse = new JSONObject( );
+        jObjectResponse.put( SignalementConstants.SAVE_SATISFACTION_FORM_ANSWER, false );
+        return jObjectResponse;
+    }
+
 }

@@ -267,6 +267,9 @@ public final class SignalementConstants
     /** The Constant SAVE_SIGNALEMENT. */
     public static final String SAVE_SIGNALEMENT = "sauvegarderSignalement";
 
+    /** The Constant SAVE_SATISFACTION_FORM_ANSWER. */
+    public static final String SAVE_SATISFACTION_FORM_ANSWER = "saveSatisfactionFormAnswer";
+
     /** The Constant REST_GET_EQUIPEMENTS. */
     public static final String REST_GET_EQUIPEMENTS = "getEquipements";
 
@@ -287,6 +290,9 @@ public final class SignalementConstants
 
     /** The Constant RETOUR_CREATION_SIGNALEMENT. */
     public static final String RETOUR_CREATION_SIGNALEMENT = "isSaveSignalementOk";
+
+    /** The Constant RETOUR_SAVE_SATISFACTION_FORM_ANSWER. */
+    public static final String RETOUR_SAVE_SATISFACTION_FORM_ANSWER = "isSaveSatisfactionFormAnswer";
 
     /** The Constant CODE_ERREUR_CREATION_SIGNALEMENT. */
     public static final String CODE_ERREUR_CREATION_SIGNALEMENT = "codeErreurCreation";

@@ -110,7 +110,7 @@ public class AbstractXPage extends MVCApplication
     protected static final DansMaRueUploadHandler dansmarueUploadHandler = SpringContextService.getBean( "dansmarueUploadHandler" );
 
     /** The Constant signalementBoService. */
-    protected static final SignalementBOService signalementBoService = SpringContextService.getBean( "signalementBoService" );
+    protected static final SignalementBOService _signalementBoService = SpringContextService.getBean( "signalementBoService" );
 
     /** The map errors. */
     private transient Map<String, List<ErrorMessage>> _mapErrors = new HashMap<>( );

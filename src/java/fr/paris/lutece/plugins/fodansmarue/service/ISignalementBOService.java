@@ -363,4 +363,18 @@ public interface ISignalementBOService
      */
     boolean validateServiceFaitSignalementByToken( String token, String instance );
 
+
+    /**
+     * Update signalement with satisfaction form answer by token.
+     *
+     * @param strToken
+     *            the token
+     * @param strChoixFormulaire
+     *            the answer of the satisfaction form
+     * @param strCommentaireSatisfaction
+     *            the comment of the satisfaction form
+     * @return true, if successful
+     */
+    JSONObject sauvegarderReponsesFormulaireSatisfaction( String strToken, String strChoixFormulaire, String strCommentaireSatisfaction ) throws IOException, JSONException;
+
 }
