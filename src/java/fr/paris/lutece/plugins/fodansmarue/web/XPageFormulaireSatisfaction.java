@@ -34,6 +34,7 @@
 package fr.paris.lutece.plugins.fodansmarue.web;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,7 @@ import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
 import fr.paris.lutece.portal.web.xpages.XPage;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jettison.json.JSONException;
 
 /**
@@ -60,6 +62,8 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
     /** The Constant ACTION_VALIDER_CHOIX. */
     private static final String ACTION_VALIDER_CHOIX = "valider_choix";
 
+    /** The Constant MARK_MESSAGE_ERREUR. */
+    private static final String MARK_MESSAGE_ERREUR = "erreur";
 
     /** The Constant MARK_SIGNALEMENT. */
     // MARKER
@@ -121,6 +125,13 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
         String strCommentaire = request.getParameter( MARK_COMMENTAIRE_FORMULAIRE );
 
         _signalementBoService.sauvegarderReponsesFormulaireSatisfaction( _strToken, strReponseFormulaire, strCommentaire );
+
+        String error = "";
+
+        if ( StringUtils.isEmpty( strReponseFormulaire ) )
+        {
+            model.put( MARK_MESSAGE_ERREUR, error );
+        }
 
         model.put( MARK_IS_SATISFACTION_FORM_COMPLETE, true );
 
