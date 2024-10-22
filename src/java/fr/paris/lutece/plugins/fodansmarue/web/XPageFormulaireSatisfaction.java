@@ -33,17 +33,21 @@
  */
 package fr.paris.lutece.plugins.fodansmarue.web;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import fr.paris.lutece.plugins.fodansmarue.commons.BusinessException;
+import fr.paris.lutece.plugins.fodansmarue.commons.FunctionnalException;
+import fr.paris.lutece.portal.service.i18n.I18nService;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.annotations.Controller;
 import fr.paris.lutece.portal.web.xpages.XPage;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  * The Class XPageFormulaireSatisfaction.
@@ -63,17 +67,11 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
     private static final String ACTION_VALIDER_CHOIX = "valider_choix";
 
     /** The Constant MARK_MESSAGE_ERREUR. */
-    private static final String MARK_MESSAGE_ERREUR = "erreur";
+    private static final String MARK_MESSAGE_ERROR= "error";
 
     /** The Constant MARK_SIGNALEMENT. */
     // MARKER
     private static final String MARK_SIGNALEMENT = "signalement";
-
-    /** The Constant MARK_REPONSE_FORMULAIRE. */
-    private static final String MARK_REPONSE_FORMULAIRE = "reponseFormulaire";
-
-    /** The Constant MARK_COMMENTAIRE_FORMULAIRE. */
-    private static final String MARK_COMMENTAIRE_FORMULAIRE = "commentaire";
 
     /** The Constant MARK_TOKEN. */
     private static final String MARK_TOKEN = "token";
@@ -81,11 +79,26 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
     /** The Constant MARK_IS_SATISFACTION_FORM_COMPLETE. */
     private static final String MARK_IS_SATISFACTION_FORM_COMPLETE = "isSatisfactionFormComplete";
 
-    /** The Constant PROPERTY_ID_STATE_SERVICE_FAIT. */
-    // PROPERTIES
-    public static final String PROPERTY_ID_STATE_SERVICE_FAIT = "signalement.idStateServiceFait";
+    /** The Constant MARK_ERROR_SAVE_SATISFACTION_FORM_ANSWER. */
+    private static final String MARK_ERROR_SAVE_SATISFACTION_FORM_ANSWER = "errorSave";
+
+    // PARAMETERS
+    /** The Constant PARAMETER_REPONSE_FORMULAIRE. */
+    private static final String PARAMETER_REPONSE_FORMULAIRE = "reponseFormulaire";
+
+    /** The Constant PARAMETER_COMMENTAIRE_FORMULAIRE. */
+    private static final String PARAMETER_COMMENTAIRE_FORMULAIRE = "commentaire";
+
+    //ERRORS MESSAGES
+    /** The Constant MESSAGE_ERROR_REPONSE_OBLIGATOIRE. */
+    private static final String MESSAGE_ERROR_REPONSE_OBLIGATOIRE = "fodansmarue.formulaire.satisfaction.reponseObligatoireError";
+
+    /** The Constant MESSAGE_ERROR_SAVE. */
+    private static final String MESSAGE_ERROR_SAVE = "fodansmarue.formulaire.satisfaction.saveError";
 
     private String _strToken;
+
+    private boolean _isSatisfactionFormComplete = false;
 
     /**
      * Returns the content of the page accueil.
@@ -93,17 +106,21 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
      * @param request
      *            The HTTP request
      * @return The view
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
      */
     @View( value = AbstractXPage.XPAGE_FORMULAIRE_SATISFACTION, defaultView = true )
-    public XPage viewFormulaireSatisfaction( HttpServletRequest request ) throws IOException
+    public XPage viewFormulaireSatisfaction( HttpServletRequest request )
     {
         Map<String, Object> model = getModel( );
-        _strToken = request.getParameter( MARK_TOKEN );
+        if ( StringUtils.isEmpty( _strToken ) )
+        {
+            _strToken = request.getParameter( MARK_TOKEN );
+        }
 
-        model.put( MARK_IS_SATISFACTION_FORM_COMPLETE, false );
+        model.put( MARK_IS_SATISFACTION_FORM_COMPLETE, _isSatisfactionFormComplete );
         model.put( MARK_TOKEN, _strToken );
+        model.put( MARK_MAP_ERRORS, request.getSession( ).getAttribute( MARK_MAP_ERRORS ) );
+        request.getSession( ).setAttribute( MARK_MAP_ERRORS, null );
+
         return getXPage( TEMPLATE_XPAGE_FORMULAIRE_SATISFACTION, request.getLocale( ), model );
     }
 
@@ -113,29 +130,49 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
      * @param request
      *            the request
      * @return the x page
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
      */
     @Action( ACTION_VALIDER_CHOIX )
-    public XPage validerChoix( HttpServletRequest request ) throws JSONException, IOException
+    public XPage validerChoix( HttpServletRequest request ) throws JSONException
     {
-        Map<String, Object> model = getModel( );
+        String strReponseFormulaire = request.getParameter( PARAMETER_REPONSE_FORMULAIRE );
+        String strCommentaire = request.getParameter( PARAMETER_COMMENTAIRE_FORMULAIRE );
 
-        String strReponseFormulaire = request.getParameter( MARK_REPONSE_FORMULAIRE );
-        String strCommentaire = request.getParameter( MARK_COMMENTAIRE_FORMULAIRE );
-
-        _signalementBoService.sauvegarderReponsesFormulaireSatisfaction( _strToken, strReponseFormulaire, strCommentaire );
-
-        String error = "";
+        Map<String, String> errors = new HashMap<>( );
 
         if ( StringUtils.isEmpty( strReponseFormulaire ) )
         {
-            model.put( MARK_MESSAGE_ERREUR, error );
+            errors.put( PARAMETER_REPONSE_FORMULAIRE, I18nService.getLocalizedString( MESSAGE_ERROR_REPONSE_OBLIGATOIRE, request.getLocale( ) ) );
+            request.getSession( ).setAttribute( MARK_MAP_ERRORS, errors );
+            _isSatisfactionFormComplete = false;
+        } else
+        {
+            JSONObject response = _signalementBoService.sauvegarderReponsesFormulaireSatisfaction( _strToken, strReponseFormulaire, strCommentaire );
+
+            if ( response.has( "sauvegarderFeedbackOk" ) )
+            {
+                String sauvegarderFeedbackOk = response.get( "sauvegarderFeedbackOk" ).toString( );
+
+                boolean isSauvegarderFeedbackOk = Boolean.parseBoolean( sauvegarderFeedbackOk );
+
+                if ( isSauvegarderFeedbackOk )
+                {
+                    _isSatisfactionFormComplete = true;
+                } else
+                {
+                    errors.put( MARK_ERROR_SAVE_SATISFACTION_FORM_ANSWER, I18nService.getLocalizedString( MESSAGE_ERROR_SAVE, request.getLocale( ) ) );
+                    request.getSession( ).setAttribute( MARK_MAP_ERRORS, errors );
+                    _isSatisfactionFormComplete = false;
+                }
+
+            }
+            else
+            {
+                errors.put( MARK_ERROR_SAVE_SATISFACTION_FORM_ANSWER, I18nService.getLocalizedString( MESSAGE_ERROR_SAVE, request.getLocale( ) ) );
+                request.getSession( ).setAttribute( MARK_MAP_ERRORS, errors );
+                _isSatisfactionFormComplete = false;
+            }
         }
+        return redirectView( request, TEMPLATE_XPAGE_FORMULAIRE_SATISFACTION );
 
-        model.put( MARK_IS_SATISFACTION_FORM_COMPLETE, true );
-
-        return getXPage( TEMPLATE_XPAGE_FORMULAIRE_SATISFACTION, request.getLocale( ), model );
     }
-
 }

@@ -1,15 +1,9 @@
 <@header/>
-<#if erreur != "" >
-<div class="error">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-			${erreur}
-			</div>
-		</div>
-	</div>
-</div>
-</#if>
+<@checkForErrors key="errorSave">
+</@checkForErrors>
+<@printError key="errorSave"/>
+
+
 <br/>
 <section id="page_formulaireSatisfaction">
     <#if isSatisfactionFormComplete>
@@ -33,11 +27,14 @@
     </div>
     <br/>
     <form id="form" action="jsp/site/Portal.jsp?page=formulaireSatisfaction"  method="post" novalidate>
+        
         <div class="container">
             <div class="content">
                 <div class="row">
                     <div class="col-md-8 col-sm-8 col-xs-12">
+                        
                         <div>
+                            <@checkForErrors key="reponseFormulaire">
                             <label for="choixAnomalieResolue" class="info-suivi">
                                 <input type="radio" id="choixAnomalieResolue" name="reponseFormulaire" value="1">
                                 #i18n{fodansmarue.formulaire.satisfaction.radioButton.choixAnomalieResolue}
@@ -50,17 +47,21 @@
                                 <input type="radio" id="choixAnomalieResolueEnPartie" name="reponseFormulaire" value="2">
                                 #i18n{fodansmarue.formulaire.satisfaction.radioButton.choixAnomalieResolueEnPartie}
                             </label>
-                        </div>
-                        <br/>
-                        <label for="commentaire" class="small">#i18n{fodansmarue.formulaire.satisfaction.commentaire.title}</label>
-                        <input type="text" maxlength="255" class="form-control" id="commentaire" name="commentaire" value=""/>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-center continue" name="action_valider_choix" role="button">#i18n{fodansmarue.valider}</button>
-                        </div>
+                            </@checkForErrors>
+                            <@printError key="reponseFormulaire"/>
+                    </div>
+                    
+                    <br/>
+                    <label for="commentaire" class="small">#i18n{fodansmarue.formulaire.satisfaction.commentaire.title}</label>
+                    <input type="text" maxlength="255" class="form-control" id="commentaire" name="commentaire" value=""/>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-center continue" name="action_valider_choix" role="button">#i18n{fodansmarue.valider}</button>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+    
     </form>
 </#if>
 </section>
