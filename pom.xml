@@ -29,7 +29,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <profile.pre-recette.dir>${basedir}/src/conf/prerec</profile.pre-recette.dir>
     <maven.javadoc.skip>true</maven.javadoc.skip>
-    <module.leaflet-bienvu.version>0.0.3-SNAPSHOT</module.leaflet-bienvu.version>
+    <module.leaflet-bienvu.version>0.0.5-SNAPSHOT</module.leaflet-bienvu.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -75,6 +75,11 @@
 	    <artifactId>postgresql</artifactId>
 	    <version>42.2.23</version>
 	</dependency>
+    <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <version>1.1</version>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>
@@ -84,7 +89,7 @@
       </snapshots>
       <id>luteceReleaseRepository</id>
       <name>luteceReleaseRepository</name>
-      <url>http://dev.lutece.paris.fr/nexus/content/groups/maven_repository/</url>
+      <url>https://dev.lutece.paris.fr/nexus/content/groups/maven_repository/</url>
     </repository>
     <repository>
       <releases>
@@ -93,7 +98,7 @@
       <snapshots />
       <id>luteceSnapshotRepository</id>
       <name>luteceSnapshotRepository</name>
-      <url>http://dev.lutece.paris.fr/nexus/content/groups/snapshot_repository/</url>
+      <url>https://dev.lutece.paris.fr/nexus/content/groups/snapshot_repository/</url>
     </repository>
   </repositories>
   <build>

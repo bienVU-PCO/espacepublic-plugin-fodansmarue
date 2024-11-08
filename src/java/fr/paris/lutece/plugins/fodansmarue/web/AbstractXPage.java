@@ -86,6 +86,9 @@ public class AbstractXPage extends MVCApplication
     /** The Constant XPAGE_SUIVI. */
     public static final String XPAGE_SUIVI = "suivi";
 
+    /** The Constant XPAGE_FORMULAIRE_SATISFACTION. */
+    public static final String XPAGE_FORMULAIRE_SATISFACTION = "formulaireSatisfaction";
+
     /** The Constant URL_ACCUEIL. */
     // URLS
     protected static final String URL_ACCUEIL = "jsp/site/Portal.jsp?page=accueil";
@@ -107,7 +110,7 @@ public class AbstractXPage extends MVCApplication
     protected static final DansMaRueUploadHandler dansmarueUploadHandler = SpringContextService.getBean( "dansmarueUploadHandler" );
 
     /** The Constant signalementBoService. */
-    protected static final SignalementBOService signalementBoService = SpringContextService.getBean( "signalementBoService" );
+    protected static final SignalementBOService _signalementBoService = SpringContextService.getBean( "signalementBoService" );
 
     /** The map errors. */
     private transient Map<String, List<ErrorMessage>> _mapErrors = new HashMap<>( );

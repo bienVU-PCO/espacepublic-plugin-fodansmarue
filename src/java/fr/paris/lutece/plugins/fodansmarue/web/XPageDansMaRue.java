@@ -398,7 +398,7 @@ public class XPageDansMaRue extends AbstractXPage
         Map<String, Object> model = getModel( );
         _luteceUser = getUser( request, false );
 
-        _typeEquipementList = signalementBoService.getAllEquipements( );
+        _typeEquipementList = _signalementBoService.getAllEquipements( );
         _photos = new ArrayList<>( );
 
         ReferenceList refListTypeEquipement = ListUtils.toReferenceList( _typeEquipementList, JSON_KEY_ID, "libelleEcranMobile", null );
@@ -543,7 +543,7 @@ public class XPageDansMaRue extends AbstractXPage
         Adresse adresse = new Adresse( );
         adresse.setAdresse( address );
 
-        List<Address> addressList = signalementBoService.getAddressItem( address );
+        List<Address> addressList = _signalementBoService.getAddressItem( address );
 
         model.put( MARK_ADRESSE, adresse );
         model.put( MARK_PROPOSED_ADDRESSES, addressList );
@@ -583,7 +583,7 @@ public class XPageDansMaRue extends AbstractXPage
             // transform the lambert coordinates to WGS84 for the
             Double [ ] geom = null;
 
-            geom = signalementBoService.getGeomFromLambertToWgs84( dLng, dLat );
+            geom = _signalementBoService.getGeomFromLambertToWgs84( dLng, dLat );
 
             adresse.setAdresse( labelAddress );
             if ( geom != null )
@@ -706,10 +706,10 @@ public class XPageDansMaRue extends AbstractXPage
         TypeSignalement typeSignalement = null;
 
         // get all the dossiers and signalements in perimeter
-        List<DossierSignalementDTO> listDoublonsSignalement = signalementBoService.findAllSignalementInPerimeterWithDTO( lat, lng, 50 );
+        List<DossierSignalementDTO> listDoublonsSignalement = _signalementBoService.findAllSignalementInPerimeterWithDTO( lat, lng, 50 );
 
         // Ajout des dossier Ramen dans la liste des signalement
-        List<DossierSignalementDTO> listDossierRamen = signalementBoService.getDossiersCourrantsByGeomWithLimit( lng, lat );
+        List<DossierSignalementDTO> listDossierRamen = _signalementBoService.getDossiersCourrantsByGeomWithLimit( lng, lat );
 
         Iterator<DossierSignalementDTO> dosIterator = listDossierRamen.iterator( );
         while ( dosIterator.hasNext( ) )
@@ -717,8 +717,8 @@ public class XPageDansMaRue extends AbstractXPage
             DossierSignalementDTO dossierSignalementDTO = dosIterator.next( );
 
             dossierSignalementDTO.setDistance(
-                    signalementBoService.getDistanceBetweenSignalement( lat, lng, dossierSignalementDTO.getLat( ), dossierSignalementDTO.getLng( ) ) );
-            typeSignalement = signalementBoService.findByIdTypeSignalement( 1000 );
+                    _signalementBoService.getDistanceBetweenSignalement( lat, lng, dossierSignalementDTO.getLat( ), dossierSignalementDTO.getLng( ) ) );
+            typeSignalement = _signalementBoService.findByIdTypeSignalement( 1000 );
 
             if ( StringUtils.isEmpty( dossierSignalementDTO.getImgUrl( ) ) && ( typeSignalement != null ) )
             {
@@ -732,7 +732,7 @@ public class XPageDansMaRue extends AbstractXPage
             DossierSignalementDTO dossierSignalementDTO = sigIterator.next( );
             // Vérification si statut permettant le suivi
 
-            if ( signalementBoService.isSignalementFollowableAndisSignalementFollowedByUser( dossierSignalementDTO.getId( ).intValue( ),
+            if ( _signalementBoService.isSignalementFollowableAndisSignalementFollowedByUser( dossierSignalementDTO.getId( ).intValue( ),
                     user != null ? user.getName( ) : null, _choice ) )
             {
                 sigIterator.remove( );
@@ -740,8 +740,8 @@ public class XPageDansMaRue extends AbstractXPage
             }
 
             dossierSignalementDTO.setDistance(
-                    signalementBoService.getDistanceBetweenSignalement( lat, lng, dossierSignalementDTO.getLat( ), dossierSignalementDTO.getLng( ) ) );
-            typeSignalement = signalementBoService.getTypeSignalement( Integer.parseInt( dossierSignalementDTO.getType( ) ), _choice );
+                    _signalementBoService.getDistanceBetweenSignalement( lat, lng, dossierSignalementDTO.getLat( ), dossierSignalementDTO.getLng( ) ) );
+            typeSignalement = _signalementBoService.getTypeSignalement( Integer.parseInt( dossierSignalementDTO.getType( ) ), _choice );
 
             dossierSignalementDTO.setType( typeSignalement.getFormatTypeSignalement( ) );
             // on récupère l'image par defaut s'il n'y a pas d'image enregistrer
@@ -779,7 +779,7 @@ public class XPageDansMaRue extends AbstractXPage
         TypeSignalement typeSignalement = null;
 
         // get all the dossiers and signalements in perimeter
-        List<DossierSignalementDTO> listDoublonsSignalement = signalementBoService.getIncidentsByEquipement( equipement.getId( ) );
+        List<DossierSignalementDTO> listDoublonsSignalement = _signalementBoService.getIncidentsByEquipement( equipement.getId( ) );
         // set le type de signalement pour chaque DossierSignalementDTO
         Iterator<DossierSignalementDTO> sigIterator = listDoublonsSignalement.iterator( );
         while ( sigIterator.hasNext( ) )
@@ -787,14 +787,14 @@ public class XPageDansMaRue extends AbstractXPage
             DossierSignalementDTO dossierSignalementDTO = sigIterator.next( );
             // Vérification si statut permettant le suivi
 
-            if ( signalementBoService.isSignalementFollowableAndisSignalementFollowedByUser( dossierSignalementDTO.getId( ).intValue( ),
+            if ( _signalementBoService.isSignalementFollowableAndisSignalementFollowedByUser( dossierSignalementDTO.getId( ).intValue( ),
                     user != null ? user.getName( ) : null, _choice ) )
             {
                 sigIterator.remove( );
                 continue;
             }
 
-            typeSignalement = signalementBoService.getTypeSignalement( Integer.parseInt( dossierSignalementDTO.getType( ) ), _choice );
+            typeSignalement = _signalementBoService.getTypeSignalement( Integer.parseInt( dossierSignalementDTO.getType( ) ), _choice );
 
             dossierSignalementDTO.setType( typeSignalement.getFormatTypeSignalement( ) );
             // on récupère l'image par defaut s'il n'y a pas d'image enregistrer
@@ -875,7 +875,7 @@ public class XPageDansMaRue extends AbstractXPage
 
                 // transform the lambert coordinates to WGS84 for the
                 Double [ ] geom = null;
-                geom = signalementBoService.getGeomFromLambert93ToWgs84( lat, lng );
+                geom = _signalementBoService.getGeomFromLambert93ToWgs84( lat, lng );
 
                 if ( ( geom != null ) && ( geom.length > 0 ) )
                 {
@@ -889,9 +889,9 @@ public class XPageDansMaRue extends AbstractXPage
             }
             // Récupération des signalements pour la source
             int idSource = Integer.parseInt( request.getParameter( PARAMETER_ID_SOURCE ) );
-            typeSignalementTree = signalementBoService.getTypeSignalementTreeForSource( idSource );
+            typeSignalementTree = _signalementBoService.getTypeSignalementTreeForSource( idSource );
 
-            _source = signalementBoService.getInfosForSource( idSource );
+            _source = _signalementBoService.getInfosForSource( idSource );
 
             _signalement.setCommentaireAgentTerrain( ( _source != null ) && ( _source.getCommentaire( ) != null ) ? _source.getCommentaire( )
                     : request.getParameter( PARAMETER_REF_ITEM_SOURCE ) );
@@ -920,7 +920,7 @@ public class XPageDansMaRue extends AbstractXPage
                 adresse = _signalement.getAdresses( ).get( 0 );
 
                 // Récupération des signalements pour la source
-                typeSignalementTree = signalementBoService.getTypeSignalementTreeForSource( _source.getId( ) );
+                typeSignalementTree = _signalementBoService.getTypeSignalementTreeForSource( _source.getId( ) );
                 _typeEquipement = new TypeEquipement( );
                 _typeEquipement.setId( -1L );
             }
@@ -929,12 +929,12 @@ public class XPageDansMaRue extends AbstractXPage
                 if ( CHOICE_ESPACE_PUBLIC.equals( _choice ) )
                 {
                     adresse = _signalement.getAdresses( ).get( 0 );
-                    typeSignalementTree = signalementBoService.getTypeSignalementTree( );
+                    typeSignalementTree = _signalementBoService.getTypeSignalementTree( );
                 }
                 else
                 {
                     equipement = _signalement.getEquipement( );
-                    typeSignalementTree = signalementBoService.getTypeSignalementTreeEquipement( equipement.getParentId( ) );
+                    typeSignalementTree = _signalementBoService.getTypeSignalementTreeEquipement( equipement.getParentId( ) );
                 }
             }
 
@@ -970,7 +970,7 @@ public class XPageDansMaRue extends AbstractXPage
         if ( StringUtils.isNotEmpty( request.getParameter( PARAMETER_WITHOUT_JS ) ) && ( request.getParameter( "radiobtn-grp-acc" ) != null ) )
         {
 
-            typeSignalement = signalementBoService.getTypeSignalement( Integer.parseInt( request.getParameter( "radiobtn-grp-acc" ) ), _choice );
+            typeSignalement = _signalementBoService.getTypeSignalement( Integer.parseInt( request.getParameter( "radiobtn-grp-acc" ) ), _choice );
 
             _signalement.setTypeSignalement( typeSignalement );
         }
@@ -980,7 +980,7 @@ public class XPageDansMaRue extends AbstractXPage
                     && !"0".equals( request.getParameter( PARAMETER_TYPE_SIGNALEMENT_ID ) ) )
             {
 
-                typeSignalement = signalementBoService.getTypeSignalement( Integer.parseInt( request.getParameter( PARAMETER_TYPE_SIGNALEMENT_ID ) ), _choice );
+                typeSignalement = _signalementBoService.getTypeSignalement( Integer.parseInt( request.getParameter( PARAMETER_TYPE_SIGNALEMENT_ID ) ), _choice );
 
                 _signalement.setTypeSignalement( typeSignalement );
             }
@@ -1059,7 +1059,7 @@ public class XPageDansMaRue extends AbstractXPage
         model.put( MARK_SIGNALEMENT, _signalement );
         model.put( MARK_MAP_ERRORS, request.getSession( ).getAttribute( MARK_MAP_ERRORS ) );
 
-        List<Priorite> priorites = signalementBoService.getAllPriorite( _choice );
+        List<Priorite> priorites = _signalementBoService.getAllPriorite( _choice );
 
         ReferenceList listePriorite = ListUtils.toReferenceList( priorites, "id", "libelle", null, false );
 
@@ -1104,7 +1104,7 @@ public class XPageDansMaRue extends AbstractXPage
             long idSignalement = Integer.parseInt( request.getParameter( PARAMETER_SIGNALEMENT_ID ) );
             try
             {
-                signalementBoService.addFollower( idSignalement, user.getName( ), "", user.getUserInfo( LuteceUser.BUSINESS_INFO_ONLINE_EMAIL ), "", "", true,
+                _signalementBoService.addFollower( idSignalement, user.getName( ), "", user.getUserInfo( LuteceUser.BUSINESS_INFO_ONLINE_EMAIL ), "", "", true,
                         _choice );
             }
             catch( Exception e )
@@ -1139,7 +1139,7 @@ public class XPageDansMaRue extends AbstractXPage
             Priorite priorite = null;
             try
             {
-                priorite = signalementBoService.loadPrioriteById( NumberUtils.toInt( request.getParameter( PARAMETER_PRIORITE ) ) );
+                priorite = _signalementBoService.loadPrioriteById( NumberUtils.toInt( request.getParameter( PARAMETER_PRIORITE ) ) );
             }
             catch( IOException | JSONException e )
             {
@@ -1364,7 +1364,7 @@ public class XPageDansMaRue extends AbstractXPage
         }
         try
         {
-            JSONObject jObject = signalementBoService.sauvegarderSignalement( _signalement, user, _choice );
+            JSONObject jObject = _signalementBoService.sauvegarderSignalement( _signalement, user, _choice );
 
             boolean isCreationSignalementOk = jObject.getBoolean( SignalementConstants.RETOUR_CREATION_SIGNALEMENT );
 
