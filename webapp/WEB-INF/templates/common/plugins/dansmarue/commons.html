@@ -25,6 +25,33 @@
 			<img  src="images/image-DMR/hero.jpg" class="hidden" alt="Image d'illustration du t&eacute;l&eacute;service bien vu"/>
 		</div>
 </#macro>
+<#macro headerWithCustomTitle title>
+<header>
+	<nav class="navbar navbar-default navbar-general">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="logo" href="https://plainecommune.fr/">
+					<img class="img-responsive " alt="Tele" src="images/image-DMR/logo.png"/>
+				</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+		<div class="hero" >
+			<div class="hero-filter">
+				<div class="container">
+					<div class="main-heading vertical-align">
+						<h1>${title}</h1>
+					</div>
+				</div>
+			</div>
+			<img  src="images/image-DMR/hero.jpg" class="hidden" alt="Image d'illustration du t&eacute;l&eacute;service bien vu"/>
+		</div>
+</#macro>
 <#macro descriptionSteps>
 <div class="picto-steps">
 	<div class="container">
@@ -188,7 +215,7 @@
          	<h2 class="title">
             <img src="images/image-DMR/step-validation.png" alt="pictogramme etape validation - non active">
             <span>${i18n('fodansmarue.etape.formulaire.anomalie.'+etape)}</span>
-            <p class="info-step1">227, rue de Bercy 75012 Paris</p> 
+            <p class="info-step1">227, rue de Bercy 75012 Paris</p>
              </h2>
            <a href="jsp/site/Portal.jsp?page=fodansmarue&view=${view}"  class="btn modifier">#i18n{fodansmarue.modifier}</a>
           </div>
@@ -211,7 +238,7 @@
             		<p class="info-step1">${(typeEquipementLibelle)!}</p>
             	</#if>
             	
-            </div>            
+            </div>
            <a href="jsp/site/Portal.jsp?page=fodansmarue&view=dansmarue"  class="btn modifier">#i18n{fodansmarue.modifier}</a>
           </div>
     </div>
@@ -224,14 +251,14 @@
          	<h2 class="title">
             	<img src="images/image-DMR/step-validation.png" alt="pictogramme etape numero 2 - non active">
             	<span>#i18n{fodansmarue.etape.formulaire.anomalie.localisation}</span>
-            </h2>	
+            </h2>
             <div class="bloc-indication">
             	<#if choix_declaration == "Espace public">
             		<p class="info-step1">${(adresse.adresse)!}</p>
             	<#else>
             		<p class="info-step1">${(equipement.name)!}</p>
             	</#if>
-            </div>            
+            </div>
            <a href="jsp/site/Portal.jsp?page=fodansmarue&view=adresse"  class="btn modifier">#i18n{fodansmarue.modifier}</a>
           </div>
     </div>
@@ -246,8 +273,8 @@
             	<span>#i18n{fodansmarue.etape.formulaire.anomalie.enregistre}</span>
            	</h2>
             <div class="bloc-indication">
-            	<p class="info-step1">#i18n{fodansmarue.doublons.recap}</p> 
-            </div>             
+            	<p class="info-step1">#i18n{fodansmarue.doublons.recap}</p>
+            </div>
            <a href="jsp/site/Portal.jsp?page=fodansmarue&view=doublons"  class="btn modifier">#i18n{fodansmarue.modifier}</a>
           </div>
     </div>
@@ -263,7 +290,7 @@
            	</h2>
             <div class="bloc-indication col-lg-10">
             	<p class="info-step1">${(typeSignalement)!}</p>
-            </div>             
+            </div>
            <a href="jsp/site/Portal.jsp?page=fodansmarue&view=categorie" class="btn modifier center-vertical">#i18n{fodansmarue.modifier}</a>
           </div>
     </div>
@@ -287,7 +314,7 @@ function formatBytes(bytes,decimals) {
          	<h2 class="title">
             	<img src="images/image-DMR/step-validation.png" alt="pictogramme etape numero 5 - non active">
             	<span>${i18n('fodansmarue.etape.formulaire.anomalie.finalisation')}</span>
-            </h2>	
+            </h2>
             <div class="bloc-indication">
             	<p class="info-step1">#i18n{fodansmarue.etape.recap.finalisation.priorite}  ${(signalementFOBean.priorite.libelle)!}</p>
             	<p class="info-sup info-sup-precisions">#i18n{fodansmarue.etape.recap.finalisation.precision} ${(signalementFOBean.commentaire)!}</p>
@@ -370,7 +397,7 @@ function formatBytes(bytes,decimals) {
 	<script src="js/proj4js-combined.js" type="text/javascript"></script>
 	<script src="js/jquery/plugins/ui/jquery.ui.custom-autocomplete.min.js"	type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="css/plugins/jquery/plugins/ui/jquery.autocomplete.css" />
-	<link rel="stylesheet" type="text/css" href="js/jquery/plugins/ui/css/jquery-ui.min.css" /> 
+	<link rel="stylesheet" type="text/css" href="js/jquery/plugins/ui/css/jquery-ui.min.css" />
 </#macro>
 
 <#macro leaflet_map_includes>
@@ -400,14 +427,14 @@ function formatBytes(bytes,decimals) {
 	var greenIcon = new LeafIcon({
 		iconUrl: 'js/plugins/leaflet/leaflet/images/marker-icon-green.png'
 	});
-		
+	
 	var yellowIcon = new LeafIcon({
 		iconUrl: 'js/plugins/leaflet/leaflet/images/marker-icon-yellow.png'
 	});
 	
 	var redIcon = new LeafIcon({
 		iconUrl: 'js/plugins/leaflet/leaflet/images/marker-icon-red.png'
-	});	
+	});
 	
 	</script>
 </#macro>
