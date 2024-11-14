@@ -138,6 +138,9 @@ public class Signalement implements Serializable
     /** The str commentaire agent terrain. */
     private String _strCommentaireAgentTerrain;
 
+    /** nombreFeedback. */
+    private int _nNombreFeedback;
+
     /**
      * Sets the direction.
      *
@@ -841,4 +844,24 @@ public class Signalement implements Serializable
         _strCommentaireAgentTerrain = strCommentaireAgentTerrain;
     }
 
+    /**
+     * Gets the nombre feedback.
+     *
+     * @return the nombre feedback
+     */
+    public int getNombreFeedback( )
+    {
+        return _nNombreFeedback;
+    }
+
+    /**
+     * Sets the nombre feedback.
+     *
+     * @param nNombreFeedback
+     *            the new nombre feedback
+     */
+    public void setNombreFeedback( int nNombreFeedback )
+    {
+        this._nNombreFeedback = nNombreFeedback;
+    }
 }
