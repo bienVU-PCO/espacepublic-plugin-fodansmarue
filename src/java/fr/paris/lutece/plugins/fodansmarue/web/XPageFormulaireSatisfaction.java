@@ -38,6 +38,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import fr.paris.lutece.plugins.fodansmarue.business.entities.Signalement;
 import fr.paris.lutece.plugins.fodansmarue.commons.BusinessException;
 import fr.paris.lutece.plugins.fodansmarue.commons.FunctionnalException;
 import fr.paris.lutece.portal.service.i18n.I18nService;
@@ -82,6 +83,9 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
     /** The Constant MARK_ERROR_SAVE_SATISFACTION_FORM_ANSWER. */
     private static final String MARK_ERROR_SAVE_SATISFACTION_FORM_ANSWER = "errorSave";
 
+    /** The Constant MARK_INSTANCE. */
+    private static final String MARK_INSTANCE = "instance";
+
     // PARAMETERS
     /** The Constant PARAMETER_REPONSE_FORMULAIRE. */
     private static final String PARAMETER_REPONSE_FORMULAIRE = "reponseFormulaire";
@@ -98,6 +102,8 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
 
     private String _strToken;
 
+    private String _instance;
+
     private boolean _isSatisfactionFormComplete = false;
 
     /**
@@ -111,9 +117,25 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
     public XPage viewFormulaireSatisfaction( HttpServletRequest request )
     {
         Map<String, Object> model = getModel( );
-        if ( StringUtils.isEmpty( _strToken ) )
+
+        String strToken = request.getParameter( MARK_TOKEN );
+
+        if ( StringUtils.isEmpty( _strToken ) || ( strToken != null && !_strToken.equals( strToken ) ) )
         {
-            _strToken = request.getParameter( MARK_TOKEN );
+            _strToken = strToken;
+        }
+
+
+        if ( _instance == null )
+        {
+            _instance = request.getParameter( MARK_INSTANCE );
+        }
+
+        Signalement signalementByToken = _signalementBoService.getSignalementByToken( _strToken, _instance );
+
+        if ( signalementByToken != null )
+        {
+            _isSatisfactionFormComplete = signalementByToken.getNombreFeedback( ) == 1;
         }
 
         model.put( MARK_IS_SATISFACTION_FORM_COMPLETE, _isSatisfactionFormComplete );
@@ -136,14 +158,12 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
     {
         String strReponseFormulaire = request.getParameter( PARAMETER_REPONSE_FORMULAIRE );
         String strCommentaire = request.getParameter( PARAMETER_COMMENTAIRE_FORMULAIRE );
-
         Map<String, String> errors = new HashMap<>( );
 
         if ( StringUtils.isEmpty( strReponseFormulaire ) )
         {
             errors.put( PARAMETER_REPONSE_FORMULAIRE, I18nService.getLocalizedString( MESSAGE_ERROR_REPONSE_OBLIGATOIRE, request.getLocale( ) ) );
             request.getSession( ).setAttribute( MARK_MAP_ERRORS, errors );
-            _isSatisfactionFormComplete = false;
         } else
         {
             JSONObject response = _signalementBoService.sauvegarderReponsesFormulaireSatisfaction( _strToken, strReponseFormulaire, strCommentaire );
@@ -154,14 +174,10 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
 
                 boolean isSauvegarderFeedbackOk = Boolean.parseBoolean( sauvegarderFeedbackOk );
 
-                if ( isSauvegarderFeedbackOk )
-                {
-                    _isSatisfactionFormComplete = true;
-                } else
+                if ( !isSauvegarderFeedbackOk )
                 {
                     errors.put( MARK_ERROR_SAVE_SATISFACTION_FORM_ANSWER, I18nService.getLocalizedString( MESSAGE_ERROR_SAVE, request.getLocale( ) ) );
                     request.getSession( ).setAttribute( MARK_MAP_ERRORS, errors );
-                    _isSatisfactionFormComplete = false;
                 }
 
             }
@@ -169,7 +185,6 @@ public class XPageFormulaireSatisfaction extends AbstractXPage
             {
                 errors.put( MARK_ERROR_SAVE_SATISFACTION_FORM_ANSWER, I18nService.getLocalizedString( MESSAGE_ERROR_SAVE, request.getLocale( ) ) );
                 request.getSession( ).setAttribute( MARK_MAP_ERRORS, errors );
-                _isSatisfactionFormComplete = false;
             }
         }
         return redirectView( request, TEMPLATE_XPAGE_FORMULAIRE_SATISFACTION );

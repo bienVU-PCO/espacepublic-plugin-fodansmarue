@@ -940,6 +940,7 @@ public final class SignalementBOService implements ISignalementBOService
                 signalement.setMois( json.get( "mois" ).getTextValue( ) );
                 signalement.setNumero( json.get( "numero" ).getIntValue( ) );
                 signalement.setTypeSignalement( mapper.readValue( json.get( "typeSignalement" ), TypeSignalement.class ) );
+                signalement.setNombreFeedback( json.get( "nombreFeedback" ).getIntValue( ) );
 
                 if ( !instance.equals( SignalementConstants.PROPERTY_SIGNALEMENT ) )
                 {
